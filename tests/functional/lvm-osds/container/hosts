@@ -1,11 +1,12 @@
 [mons]
 mon0
+mon1
+mon2
 
 [mgrs]
 mon0
 
 [osds]
-osd0 osd_objectstore=filestore lvm_volumes="[{'data': 'data-lv1', 'journal': '/dev/sdc1', 'data_vg': 'test_group'},{'data': 'data-lv2', 'data_vg': 'test_group', 'journal': 'journal1', 'journal_vg': 'journals'}]"
-osd1 osd_objectstore=filestore lvm_volumes="[{'data': 'data-lv1', 'journal': '/dev/sdc1', 'data_vg': 'test_group'},{'data': 'data-lv2', 'data_vg': 'test_group', 'journal': 'journal1', 'journal_vg': 'journals'}]" dmcrypt=true
-osd2 osd_objectstore=bluestore lvm_volumes="[{'data': 'data-lv1', 'data_vg': 'test_group'},{'data': 'data-lv2', 'data_vg': 'test_group', 'db': 'journal1', 'db_vg': 'journals'}]"
-osd3 osd_objectstore=bluestore lvm_volumes="[{'data': 'data-lv1', 'data_vg': 'test_group'},{'data': 'data-lv2', 'data_vg': 'test_group'}]" dmcrypt=true
+osd0 dedicated_devices="['/dev/sdc','/dev/sdc']" devices="['/dev/sda','/dev/sdb']" osd_scenario="non-collocated" osd_objectstore="filestore" dmcrypt="true"
+osd1 devices="['/dev/sda','/dev/sdb','/dev/sdc']" osd_scenario="collocated" osd_objectstore="filestore"
+osd2 osd_auto_discovery=true osd_scenario="collocated" osd_objectstore="filestore" dmcrypt="true"
